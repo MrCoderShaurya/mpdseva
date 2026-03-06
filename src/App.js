@@ -43,7 +43,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundImage: 'url(/SSRVC.jpg)' }}>
       <header>
         <h1>Morning Program Attendance - Email Reports</h1>
         <button className="draft-all-btn" onClick={sendAllReports} disabled={loading}>
