@@ -35,13 +35,14 @@ function App() {
       
       await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }) })]);
       
-      // Open Gmail web (works on both mobile and desktop)
-      window.open('https://mail.google.com/mail/?view=cm&fs=1&su=Attendance%20Report%20-%20All%20Devotees', '_blank');
+      // Force desktop mode Gmail to prevent app redirect on mobile
+      const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&su=Attendance%20Report%20-%20All%20Devotees';
+      window.open(gmailUrl, '_blank', 'noopener,noreferrer');
       
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       setTimeout(() => {
         alert(isMobile 
-          ? '✅ Report copied!\n\n📱 Gmail web opened in browser.\nTap in email body and hold, then select "Paste" to insert formatted report.'
+          ? '✅ Report copied!\n\n📱 Instructions:\n1. Gmail web opened in new tab\n2. If Gmail app opens instead, go back and open link in browser\n3. Tap in email body\n4. Long press and select "Paste"\n5. Formatted tables will appear!'
           : '✅ Report copied!\n\nGmail opened. Press Ctrl+V to paste.');
       }, 500);
     } catch (err) {
