@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/SSRVC.jpg') center/cover no-repeat;
+  z-index: -1;
+}
+
+.App {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  color: #2c3e50;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.draft-all-btn {
+  width: 100%;
+  padding: 18px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.draft-all-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6);
+}
+
+.draft-all-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+}
+
+.draft-all-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+  
+  header {
+    padding: 30px 20px;
+    border-radius: 15px;
+  }
+  
+  header h1 {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+  }
+  
+  .draft-all-btn {
+    font-size: 1rem;
+    padding: 16px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .draft-all-btn {
+    font-size: 0.95rem;
+    padding: 15px 20px;
+    letter-spacing: 0.3px;
+  }
+}

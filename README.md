@@ -1,22 +1,34 @@
-# DesparateSeva - Attendance Management System
+# DesparateSeva - Email Report System
 
-Mobile-friendly attendance management system for tracking devotee attendance across multiple teams and sessions.
+React + Node.js system to generate email drafts for devotee attendance reports.
 
 ## Features
-- ⚡ Instant loading with optimized performance
-- 📱 Mobile-responsive Excel-like interface
+- 📧 Generate email drafts with attendance tables
+- 📱 Mobile-responsive card interface
 - 🔄 Real-time Google Sheets integration
 - 👥 Support for 4 teams: Yudhishthira, Bhima, Arjuna, Nakula
-- 📊 Track attendance across 3 sessions (SA, SB, MA)
-- 💾 Fast batch save with parallel processing
-- 📅 Auto-loads current date
+- 📊 View attendance across 3 sessions (SA, SB, MA)
+- ✉️ Opens Gmail compose with pre-filled data
 
 ## Quick Start
 
-### Local Setup
+### Development
 ```bash
-pip install -r requirements.txt
-python app.py
+# Install dependencies
+npm install
+
+# Run React frontend (Terminal 1)
+npm start
+
+# Run Node.js backend (Terminal 2)
+npm run server
+```
+
+### Production Build
+```bash
+npm install
+npm run build
+npm run server
 ```
 
 ### Environment Variables
@@ -29,8 +41,10 @@ python app.py
 ### Render
 1. Push to GitHub
 2. Create Web Service on Render
-3. Set environment variable: `GOOGLE_CREDENTIALS` = content of cred.json
-4. Deploy
+3. Build Command: `npm install && npm run build`
+4. Start Command: `npm run server`
+5. Set environment variable: `GOOGLE_CREDENTIALS` = content of cred.json
+6. Deploy
 
 ### Heroku
 ```bash
@@ -39,25 +53,22 @@ heroku config:set GOOGLE_CREDENTIALS="$(cat cred.json)"
 git push heroku main
 ```
 
-### Railway
-1. Connect GitHub repo
-2. Add `GOOGLE_CREDENTIALS` environment variable
-3. Deploy
-
 ## File Structure
 ```
 DesparateSeva/
-├── app.py              # Flask application
-├── templates/
-│   └── index.html      # UI
-├── requirements.txt    # Dependencies
-├── Procfile           # Deployment config
-├── runtime.txt        # Python version
-└── .gitignore         # Git ignore
+├── src/
+│   ├── App.js          # React main component
+│   ├── App.css         # Styles
+│   └── index.js        # React entry
+├── public/
+│   └── index.html      # HTML template
+├── server.js           # Node.js Express API
+├── package.json        # Dependencies
+└── .gitignore
 ```
 
 ## Tech Stack
-- Flask
-- Google Sheets API (gspread)
-- Parallel processing (ThreadPoolExecutor)
-- Mobile-first responsive design
+- React 18
+- Node.js + Express
+- Google Sheets API
+- Gmail compose integration
