@@ -35,14 +35,14 @@ function App() {
       
       await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }) })]);
       
-      // Use mailto for mobile, opens Gmail app directly
-      window.location.href = 'mailto:?subject=Attendance Report - All Devotees';
+      // Open Gmail web (works on both mobile and desktop)
+      window.open('https://mail.google.com/mail/?view=cm&fs=1&su=Attendance%20Report%20-%20All%20Devotees', '_blank');
       
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       setTimeout(() => {
         alert(isMobile 
-          ? '✅ Report copied!\n\n📱 Gmail app will open. Tap in the email body and select "Paste" to insert the formatted report.'
-          : '✅ Report copied!\n\n💻 Email compose opened. Press Ctrl+V to paste the formatted report.');
+          ? '✅ Report copied!\n\n📱 Gmail web opened in browser.\nTap in email body and hold, then select "Paste" to insert formatted report.'
+          : '✅ Report copied!\n\nGmail opened. Press Ctrl+V to paste.');
       }, 500);
     } catch (err) {
       alert('❌ Error: ' + err.message);
