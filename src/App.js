@@ -35,15 +35,15 @@ function App() {
       
       await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }) })]);
       
-      // Use mailto for better mobile compatibility
+      // Use mailto for mobile, opens Gmail app directly
+      window.location.href = 'mailto:?subject=Attendance Report - All Devotees';
+      
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        window.location.href = 'mailto:?subject=Attendance Report - All Devotees';
-        alert('✅ Report copied!\n\n📱 Gmail will open. Long press in the email body and select "Paste" to insert the formatted report.');
-      } else {
-        window.open('https://mail.google.com/mail/?view=cm&fs=1&su=Attendance%20Report%20-%20All%20Devotees', '_blank');
-        alert('✅ Report copied! Gmail opened. Press Ctrl+V to paste.');
-      }
+      setTimeout(() => {
+        alert(isMobile 
+          ? '✅ Report copied!\n\n📱 Gmail app will open. Tap in the email body and select "Paste" to insert the formatted report.'
+          : '✅ Report copied!\n\n💻 Email compose opened. Press Ctrl+V to paste the formatted report.');
+      }, 500);
     } catch (err) {
       alert('❌ Error: ' + err.message);
     }
