@@ -42,7 +42,7 @@ const MEMBERS = [
   { name: "Vipul pr", team: "Nakula" }
 ];
 
-const SHEET_ID = process.env.SHEET_ID || "1PC7J0vn6rUtDyHouB7Q-iBcn_U85MH1Ypnv1uhVSmPg";
+const SHEET_ID = process.env.SHEET_ID || "1rfIVF-ALxwbGVJ7PanQnke8ubiGzJNvf2J2Ix5kPa_Y";
 
 const auth = new google.auth.GoogleAuth({
   credentials: process.env.GOOGLE_CREDENTIALS ? JSON.parse(process.env.GOOGLE_CREDENTIALS) : require('./cred.json'),
@@ -85,16 +85,21 @@ app.get('/api/devotees', async (req, res) => {
           const rows = response.data.values || [];
           let summary = { total: 0, p: [0,0,0], late: [0,0,0], a: [0,0,0], home: [0,0,0], health: [0,0,0], seva: [0,0,0], wr: [0,0,0], e: [0,0,0], pstar: [0,0,0], dk: 0 };
           
-          for (let i = 0; i < 31; i++) {
+          const daysInMonth = new Date().getDate(); // Get current day of month
+          
+          for (let i = 0; i < daysInMonth && i < 31; i++) {
             const row = rows[i] || [];
             const [sa, sb, ma, in_dk] = row;
             
-            if (sa || sb || ma) summary.total++;
+            // Count total days with any attendance
+            const hasAttendance = (sa && sa.toString().trim()) || (sb && sb.toString().trim()) || (ma && ma.toString().trim());
+            if (hasAttendance) summary.total++;
+            
             if (in_dk && in_dk.toString().toUpperCase() === 'TRUE') summary.dk++;
             
             [sa, sb, ma].forEach((val, idx) => {
-              if (!val) return;
-              const v = val.toString().toUpperCase();
+              if (!val || !val.toString().trim()) return;
+              const v = val.toString().toUpperCase().trim();
               if (v === 'P') summary.p[idx]++;
               else if (v.startsWith('L')) summary.late[idx]++;
               else if (v === 'A') summary.a[idx]++;
